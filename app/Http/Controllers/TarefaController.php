@@ -9,6 +9,7 @@ class TarefaController extends Controller
 {
     public function index(){
         $tarefas = Tarefas::where('user_id', Auth::id())->get();
+        // $tarefas = Tarefas::all();
         return view('tarefas.index',compact('tarefas'));
     }
     public function create(){
@@ -48,11 +49,14 @@ public function update(Request $request, $id)
 
     // Redireciona para a página de listagem das tarefas
     return redirect()->route('tarefas.index')->with('success', 'Tarefa atualizada com sucesso!');
+    
 }public function edit($id)
 {
     // Encontre a tarefa pelo ID
     $tarefa = Tarefas::findOrFail($id);
-    
+    if ($tarefa->user_id !== Auth::id()) {
+        abort(403, 'Você não tem permissão para editar esta tarefa.');
+    }
     // Retorna a view de edição passando a tarefa
     return view('tarefas.edit', compact('tarefa'));
 }

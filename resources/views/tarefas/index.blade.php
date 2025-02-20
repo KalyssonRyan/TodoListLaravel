@@ -20,8 +20,10 @@
             <li class="list-group-item">
                 <strong>{{ $tarefa->titulo }}</strong>: {{ $tarefa->descricao }}
                 <p><small>Criado por: {{ $tarefa->user->name }}</small></p>
-                <a type="text" class="btn btn-info btn-sm" href="{{ route('tarefas.edit', $tarefa->id) }}">Editar</a>
+                
+                
                 @if($tarefa->user_id == auth()->id())
+                <a type="text" class="btn btn-info btn-sm" href="{{ route('tarefas.edit', $tarefa->id) }}">Editar</a>
                     <!-- Botão para marcar como completada -->
                     <form action="{{ route('tarefas.completar', $tarefa->id) }}" method="POST" style="display:inline;">
                         @csrf
