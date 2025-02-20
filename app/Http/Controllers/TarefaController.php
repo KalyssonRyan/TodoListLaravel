@@ -64,7 +64,7 @@ public function destroy($id)
     $tarefa->delete();
 
     // Redireciona de volta para a lista de tarefas
-    return redirect()->route('tarefas.index')->with('success', 'Tarefa excluída com sucesso!');
+    return back()->with('success', 'Tarefa excluída com sucesso!');
 }
 public function completar(Tarefas $tarefa)
 {
@@ -77,7 +77,7 @@ public function completar(Tarefas $tarefa)
     $tarefa->completado = true;
     $tarefa->save();
 
-    return redirect()->route('tarefas.completadas')->with('success', 'Tarefa marcada como completada!');
+    return redirect()->route('tarefas.index')->with('success', 'Tarefa marcada como completada!');
 }
 public function descompletar(Tarefas $tarefa)
 {

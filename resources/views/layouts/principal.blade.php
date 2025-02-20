@@ -12,7 +12,7 @@
         }
     </style>
 </head>
-<body class="d-flex flex-column"> 
+<body class="d-flex flex-column">
 
     <!-- Cabeçalho com Navegação -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
