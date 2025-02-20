@@ -77,8 +77,37 @@ public function completar(Tarefas $tarefa)
     $tarefa->completado = true;
     $tarefa->save();
 
-    return redirect()->route('tarefas.index')->with('success', 'Tarefa marcada como completada!');
+    return redirect()->route('tarefas.completadas')->with('success', 'Tarefa marcada como completada!');
+}
+public function descompletar(Tarefas $tarefa)
+{
+    // Verifica se a tarefa já está marcada como completada
+    if ($tarefa->completado) {
+        $tarefa->completado = false;
+    $tarefa->save();
+    return redirect()->route('tarefas.completadas')->with('success', 'Tarefa voltou para a lista');
+        
+    }
+
+    // Marca a tarefa como completada
+    return redirect()->route('tarefas.index')->with('error', 'A tarefa já está completada.');
+    
 }
 
+public function pendentes()
+{
+    // Filtrando as tarefas pendentes
+    $tarefas = Tarefas::where('user_id', auth()->id())->where('completado', false)->get();
+
+    return view('tarefas.index', compact('tarefas'));
+}
+
+public function completadas()
+{
+    // Filtrando as tarefas completadas
+    $tarefas = Tarefas::where('user_id', auth()->id())->where('completado', true)->get();
+
+    return view('tarefas.index', compact('tarefas'));
+}
 
 }
