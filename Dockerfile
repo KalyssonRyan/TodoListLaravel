@@ -13,8 +13,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    && docker-php-ext-configure gd \
-    && docker-php-ext-install pdo pdo_mysql pdo_sqlite gd
+    libonig-dev \
+    libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_mysql pdo_sqlite gd zip mbstring
 
 # Instalar o Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
