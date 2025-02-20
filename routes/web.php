@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/tarefas/pendentes', [TarefaController::class, 'pendentes'])->name('tarefas.pendentes');
     Route::get('/tarefas/completadas', [TarefaController::class, 'completadas'])->name('tarefas.completadas');
     Route::resource('tarefas', TarefaController::class);
+    
 
 });
 
